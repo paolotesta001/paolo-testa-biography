@@ -136,6 +136,20 @@
             padding-top: 5rem; position: relative;
         }
         .hero-content { max-width: 800px; }
+        .hero-layout {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        .hero-photo {
+            flex-shrink: 0;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 30px var(--glow), 0 0 60px rgba(123, 47, 247, 0.1);
+        }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 0.5rem;
             padding: 0.4rem 1rem; border-radius: 100px;
@@ -463,6 +477,9 @@
             .nav-links.active { right: 0; }
             .hamburger { display: flex; }
             .hero h1 { font-size: 2.5rem; letter-spacing: -1px; }
+            .hero-layout { flex-direction: column; text-align: center; }
+            .hero-photo { width: 180px; height: 180px; }
+            .hero-actions { justify-content: center; }
             .hero-stats { flex-direction: column; gap: 1rem; }
             .about-highlights { grid-template-columns: 1fr; }
             .projects-grid { grid-template-columns: 1fr; }
@@ -504,7 +521,9 @@
     <!-- Hero -->
     <section class="hero" id="hero">
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-layout">
+                <img src="photo_5857017515848961208_y.jpg" alt="Paolo Testa" class="hero-photo">
+                <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
                     Open to opportunities
@@ -540,6 +559,7 @@
                         <div class="stat-label">Artificial Intelligence</div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </section>
