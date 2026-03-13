@@ -354,16 +354,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .project-card h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
-        .project-card ul {
-            list-style: none; margin-bottom: 1.25rem;
-        }
-        .project-card ul li {
-            color: var(--text-secondary); font-size: 0.9rem; padding: 0.25rem 0;
-            padding-left: 1.25rem; position: relative;
-        }
-        .project-card ul li::before {
-            content: '▹'; position: absolute; left: 0; color: var(--accent);
-        }
+        a.project-card:hover h4 { color: var(--accent); }
         .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
         .project-tag {
             padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem;
@@ -779,46 +770,69 @@
             <h2 class="section-title fade-in">Things I've built</h2>
             <p class="section-subtitle fade-in">End-to-end AI systems, from data pipelines to cloud-deployed applications.</p>
             <div class="projects-grid">
-                <div class="project-card fade-in">
-                    <h4>End-to-End AI App Deployment on AWS</h4>
-                    <ul>
-                        <li>Architected and deployed a production-ready AI application on AWS using Terraform for automated IaC provisioning.</li>
-                        <li>Containerized the system with Docker and established automated CI/CD pipelines.</li>
-                        <li>Integrated cloud monitoring and logging for high availability and performance.</li>
-                    </ul>
+                <a href="projects/nutrition-tracker.html" class="project-card fade-in" style="text-decoration:none; color:inherit;">
+                    <h4>Smart Nutrition Tracker</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Multi-agent AI platform with ML food classification and Kubernetes deployment.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">FastAPI</span>
+                        <span class="project-tag">PyTorch</span>
+                        <span class="project-tag">Kubernetes</span>
+                        <span class="project-tag">Docker</span>
+                        <span class="project-tag">PostgreSQL</span>
+                    </div>
+                </a>
+                <a href="projects/habit-tracker.html" class="project-card fade-in" style="text-decoration:none; color:inherit;">
+                    <h4>Habit Tracker</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">CLI &amp; Progressive Web App with offline support, charts, and streak tracking.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Chart.js</span>
+                        <span class="project-tag">PWA</span>
+                        <span class="project-tag">IndexedDB</span>
+                    </div>
+                </a>
+                <a href="projects/aws-deployment.html" class="project-card fade-in" style="text-decoration:none; color:inherit;">
+                    <h4>End-to-End AI App on AWS</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Production AI deployment with Terraform IaC, Docker, and CI/CD pipelines.</p>
                     <div class="project-tags">
                         <span class="project-tag">AWS</span>
                         <span class="project-tag">Terraform</span>
                         <span class="project-tag">Docker</span>
                         <span class="project-tag">CI/CD</span>
                     </div>
-                </div>
-                <div class="project-card fade-in">
-                    <h4>Time-Series Forecasting — Kaggle</h4>
-                    <ul>
-                        <li>Built forecasting models on 20 years of data using Python and ML techniques.</li>
-                        <li>Performed feature engineering, validation, and hyperparameter tuning for optimal accuracy.</li>
-                    </ul>
+                </a>
+                <a href="projects/time-series.html" class="project-card fade-in" style="text-decoration:none; color:inherit;">
+                    <h4>Time-Series Forecasting</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Kaggle competition &mdash; ML forecasting on 20 years of historical data.</p>
                     <div class="project-tags">
                         <span class="project-tag">Python</span>
                         <span class="project-tag">Scikit-learn</span>
                         <span class="project-tag">Pandas</span>
                         <span class="project-tag">ML</span>
                     </div>
-                </div>
-                <div class="project-card fade-in">
-                    <h4>AI Automation &amp; LLM Workflow Orchestration</h4>
-                    <ul>
-                        <li>Designed LLM-based agents for multi-step workflow automation with API integrations.</li>
-                        <li>Implemented robust error handling and retry mechanisms for production reliability.</li>
-                    </ul>
+                </a>
+                <a href="projects/llm-automation.html" class="project-card fade-in" style="text-decoration:none; color:inherit;">
+                    <h4>AI Automation &amp; LLM Orchestration</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">LLM-based agents for multi-step workflow automation with API integrations.</p>
                     <div class="project-tags">
                         <span class="project-tag">LLMs</span>
                         <span class="project-tag">n8n</span>
                         <span class="project-tag">APIs</span>
                         <span class="project-tag">Automation</span>
                     </div>
-                </div>
+                </a>
+                <a href="projects/image-denoising.html" class="project-card fade-in" style="text-decoration:none; color:inherit;">
+                    <h4>Fashion-MNIST Denoising Autoencoder</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Convolutional Autoencoder that removes Gaussian noise from grayscale images.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">TensorFlow</span>
+                        <span class="project-tag">Keras</span>
+                        <span class="project-tag">CNN</span>
+                        <span class="project-tag">Deep Learning</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

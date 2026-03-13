@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Automation &amp; LLM Workflow Orchestration — Paolo Testa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a2e;
+            --accent: #00d4ff;
+            --accent-secondary: #7b2ff7;
+            --accent-gradient: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 100%);
+            --text-primary: #e8e8f0;
+            --text-secondary: #9090a8;
+            --text-muted: #5a5a72;
+            --border: #2a2a3e;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary); color: var(--text-primary);
+            line-height: 1.7; overflow-x: hidden;
+        }
+        a { color: var(--accent); text-decoration: none; transition: all 0.3s ease; }
+        a:hover { color: #fff; text-shadow: 0 0 8px var(--accent); }
+
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px; z-index: 0; pointer-events: none;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 2rem 0 1rem; font-size: 0.9rem; color: var(--text-secondary);
+        }
+        .back-link:hover { color: var(--accent); text-shadow: none; }
+
+        .project-header { padding: 2rem 0 3rem; }
+        .project-header h1 {
+            font-size: 2.5rem; font-weight: 800; letter-spacing: -1px;
+            margin-bottom: 1rem; line-height: 1.2;
+        }
+        .project-header h1 .gradient {
+            background: var(--accent-gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+        .tag {
+            padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(123,47,247,0.1); border: 1px solid rgba(123,47,247,0.2);
+            color: #b388ff;
+        }
+
+        .project-body { padding-bottom: 4rem; }
+        .project-body h2 {
+            font-size: 1.4rem; font-weight: 700; margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        .project-body p {
+            color: var(--text-secondary); font-size: 1rem; margin-bottom: 1rem;
+        }
+        .project-body ul {
+            list-style: none; margin-bottom: 1.5rem;
+        }
+        .project-body ul li {
+            color: var(--text-secondary); font-size: 0.95rem; padding: 0.3rem 0;
+            padding-left: 1.25rem; position: relative;
+        }
+        .project-body ul li::before {
+            content: '\25B9'; position: absolute; left: 0; color: var(--accent);
+        }
+
+        footer {
+            padding: 2rem; text-align: center; border-top: 1px solid var(--border);
+            position: relative; z-index: 1;
+        }
+        footer p { color: var(--text-muted); font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .project-header h1 { font-size: 1.8rem; }
+            .container { padding: 0 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <div class="container">
+        <a href="../index.html#projects" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Projects
+        </a>
+
+        <div class="project-header">
+            <h1><span class="gradient">AI Automation &amp; LLM Workflow Orchestration</span></h1>
+            <p style="color: var(--text-secondary); font-size: 1.15rem; margin-bottom: 1.5rem;">
+                LLM-based agents for multi-step workflow automation with production-grade reliability.
+            </p>
+            <div class="tags">
+                <span class="tag">LLMs</span>
+                <span class="tag">n8n</span>
+                <span class="tag">APIs</span>
+                <span class="tag">Automation</span>
+            </div>
+        </div>
+
+        <div class="project-body">
+            <h2>Overview</h2>
+            <p>
+                Designed and implemented LLM-based agents for multi-step workflow automation,
+                integrating multiple APIs and services into cohesive automated pipelines
+                with production-grade error handling.
+            </p>
+
+            <h2>What I Built</h2>
+            <ul>
+                <li>Designed LLM-based agents capable of executing complex, multi-step workflows autonomously</li>
+                <li>Integrated multiple third-party APIs into unified automation pipelines</li>
+                <li>Implemented robust error handling and retry mechanisms for production reliability</li>
+                <li>Built orchestration flows using n8n for visual workflow management</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Paolo Testa. Built with passion for AI &amp; cloud.</p>
+        </div>
+    </footer>
+</body>
+</html>
