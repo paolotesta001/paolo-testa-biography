@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Tracker — Paolo Testa</title>
+    <title>Image Caption Generator — Paolo Testa</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -97,6 +97,13 @@
             content: '\25B9'; position: absolute; left: 0; color: var(--accent);
         }
 
+        .code-block {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 1.25rem; margin-bottom: 1.5rem; overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            color: var(--text-secondary); line-height: 1.6;
+        }
+
         footer {
             padding: 2rem; text-align: center; border-top: 1px solid var(--border);
             position: relative; z-index: 1;
@@ -120,73 +127,71 @@
 
         <div class="project-header">
             <div class="title-row">
-                <h1><span class="gradient">Habit Tracker</span></h1>
-                <a href="https://github.com/paolotesta001/habits_tracker-with-plot-and-data-saving-" target="_blank" rel="noopener" class="repo-link">
+                <h1><span class="gradient">Image Caption Generator</span></h1>
+                <a href="https://github.com/paolotesta001/DL-Image-Caption-Generator-" target="_blank" rel="noopener" class="repo-link">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                    habits_tracker-with-plot-and-data-saving-
+                    DL-Image-Caption-Generator-
                 </a>
             </div>
             <p style="color: var(--text-secondary); font-size: 1.15rem; margin-bottom: 1.5rem;">
-                A personal habit tracking app available as both a Python CLI tool and an installable Progressive Web App.
+                CNN-LSTM encoder-decoder that generates natural language descriptions for images, trained on Flickr8k.
             </p>
             <div class="tags">
-                <span class="tag">JavaScript</span>
                 <span class="tag">Python</span>
-                <span class="tag">Data Visualization</span>
-                <span class="tag">Client-side Storage</span>
-                <span class="tag">PWA</span>
-                <span class="tag">Offline-first</span>
-                <span class="tag">Static Hosting</span>
+                <span class="tag">Deep Learning</span>
+                <span class="tag">CNN</span>
+                <span class="tag">LSTM</span>
+                <span class="tag">Transfer Learning</span>
+                <span class="tag">NLP</span>
+                <span class="tag">Computer Vision</span>
             </div>
         </div>
 
         <div class="project-body">
             <h2>Overview</h2>
             <p>
-                A personal habit tracking app available as both a Python CLI tool and an installable
-                Progressive Web App that works on any device. All data is stored locally &mdash;
-                nothing leaves the user's device.
+                A deep learning pipeline that automatically generates natural language descriptions for images.
+                The system uses a CNN-LSTM encoder-decoder architecture to learn the mapping between visual features
+                and textual descriptions, trained on the Flickr8k dataset (~8,000 images, 5 captions each).
             </p>
 
-            <h2>Daily Tracking</h2>
+            <h2>Model Architecture</h2>
+            <p>Merge architecture with two independent branches fused at the decoding step:</p>
+            <div class="code-block">
+Image &rarr; ResNet50 (pretrained) &rarr; Dense(256) &mdash;\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; add &rarr; Dense(256) &rarr; softmax(vocab)<br>
+Caption &rarr; Embedding(256) &rarr; LSTM(256) &mdash;/
+            </div>
             <ul>
-                <li>Create, rename, and delete habits with categories (health, learning, lifestyle, other)</li>
-                <li>Fill out a daily diary with yes/no for each habit</li>
-                <li>Rate daily satisfaction (1-100) and write a personal note</li>
-                <li>Compact summary view after saving, with the ability to edit throughout the day</li>
+                <li><strong>Encoder:</strong> ResNet50 with ImageNet weights &mdash; extracts 2048-d visual features via transfer learning</li>
+                <li><strong>Decoder:</strong> Embedding + LSTM (256 units) &mdash; models sequential language structure with gating for long-range dependencies</li>
+                <li><strong>Merge strategy:</strong> element-wise addition keeps vision and language independent until final decoding, producing more stable training</li>
             </ul>
 
-            <h2>History &amp; Calendar</h2>
+            <h2>Training Strategy</h2>
             <ul>
-                <li>Weekly calendar grid showing completion status for each habit</li>
-                <li>Navigate between weeks to review past performance</li>
-                <li>Click any past day to fill or update its entry</li>
+                <li><strong>Loss:</strong> categorical cross-entropy &mdash; multi-class word prediction at each timestep</li>
+                <li><strong>Optimizer:</strong> Adam &mdash; adaptive learning rates for fast convergence</li>
+                <li><strong>Regularization:</strong> Dropout (0.5) on image features and embeddings to prevent overfitting on the small dataset</li>
+                <li><strong>Early stopping:</strong> patience-based with best-weight restoration</li>
+                <li><strong>Data feeding:</strong> on-the-fly generator with teacher forcing to avoid loading the full expanded dataset into memory</li>
             </ul>
 
-            <h2>Statistics &amp; Insights</h2>
+            <h2>Key Design Decisions</h2>
             <ul>
-                <li>Overall completion rates and consistency percentages per habit</li>
-                <li>Current and best streaks for each habit</li>
-                <li>Month-by-month breakdown of performance</li>
-                <li>Patterns and trends detection</li>
-                <li>Interactive progress plot (cumulative completions over time)</li>
-                <li>Satisfaction score trend plot over time</li>
+                <li><strong>ResNet50 over VGG16</strong> &mdash; deeper yet faster due to bottleneck blocks, with residual connections solving vanishing gradients</li>
+                <li><strong>LSTM over vanilla RNN</strong> &mdash; gating mechanisms capture dependencies across multi-word captions where vanilla RNNs fail</li>
+                <li><strong>Merge over inject</strong> &mdash; keeps modalities independent until fusion, shown to produce comparable or better results on small datasets</li>
+                <li><strong>Transfer learning</strong> &mdash; training a CNN from scratch on ~8k images would massively overfit; ImageNet features already encode edges, textures, and objects</li>
             </ul>
 
-            <h2>Settings &amp; Data</h2>
+            <h2>Results</h2>
             <ul>
-                <li>Dark/light theme toggle with persistent preference</li>
-                <li>Daily reminder notifications at a preferred time</li>
-                <li>Export data as JSON or CSV, import, or reset</li>
-                <li>Installable as a PWA &mdash; works fully offline via Service Worker</li>
+                <li>Training converges within ~6&ndash;11 epochs depending on early stopping patience</li>
+                <li>Model correctly identifies objects, people, and colors in many test images</li>
+                <li>Greedy decoding generates captions word-by-word from <code>startseq</code> to <code>endseq</code></li>
+                <li>Limitations on complex scenes reflect the small dataset size &mdash; attention mechanisms or beam search could improve accuracy</li>
             </ul>
-
-            <h2>Python CLI</h2>
-            <p>
-                The CLI version provides a numbered menu for adding/deleting/renaming habits,
-                filling out the daily diary with satisfaction scores and notes, viewing summaries,
-                and generating interactive Matplotlib plots (click data points to reveal date, score, and notes).
-            </p>
         </div>
     </div>
 
