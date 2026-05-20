@@ -159,27 +159,26 @@ run.font.color.rgb = BODY
 # ===== WORK EXPERIENCE =====
 add_section_heading('Work Experience')
 
-# Ex Venture - business-impact bullets (problem -> approach -> outcome)
+# Ex Venture - 5 thematic bullets, each blending platform + Hermes work
 add_exp_header('Ex Venture', 'Spain', 'AI Engineer', 'February 2026 \u2013 Present')
 for b in [
-    'Architected a multi-agent AI orchestration platform on FastAPI routing tasks across 90+ specialized skills via a custom '
-    'agent-to-agent messaging protocol; sustained sub-2s first-token latency on interactive flows and ~91% routing accuracy '
-    'on a 150-query evaluation set.',
-    'Engineered fault-tolerant LLM integrations across 7 providers (OpenAI, Gemini, Perplexity, DeepSeek, Anthropic, Kimi, '
-    'Mistral) with credential pooling, circuit breakers, exponential-backoff retries, and automatic provider failover \u2014 '
-    'held error rate <0.6% under 50 concurrent users.',
-    'Built a smart model router selecting per-request between a fast chat model, a stronger reasoning model for autonomous '
-    'workflows, and a vision model for image inputs \u2014 cut per-request cost ~40% versus single-model baselines while preserving '
-    'downstream accuracy.',
-    'Implemented a 3-layer memory architecture (durable user-profile store, full-session log with 90-day retention, and '
-    'ChromaDB-backed semantic recall) enabling sub-200ms context loading and cross-conversation continuity.',
-    'Productionized services with Docker, Kubernetes, and GitHub Actions CI/CD; added end-to-end observability '
-    '(token spend, latency, model-failover counts, error rate) and a daily memory-watchdog cron, cutting Mean-Time-To-Detect '
-    'by ~70%.',
-    'Designed a kanban-style multi-worker swarm (6 profiles: researcher, analyst, writer, reviewer, backend-eng, ops) backed by '
-    'a SQLite dispatch DB, lifting throughput on long-running research tasks ~3x.',
-    'Extended OpenClaw platform via external API integrations (OpenAI, Perplexity, AgentMail); shipped a React/TypeScript/Supabase '
-    'tracker with real-time sync and integrated a MobileNetV2 food-image classifier into a production nutrition platform.',
+    'Cost & reliability at scale \u2014 Replaced a \u20ac5,000/month commercial agent platform with an in-house FastAPI orchestrator at '
+    '\u20ac1\u20135/month (~99.96% reduction), holding error rate <0.6% across 7 LLM providers under 50 concurrent users via credential '
+    'pooling, circuit breakers, and automatic failover.',
+    'Smart routing \u2014 task-type and model selection \u2014 Layered a 4-mode task router (CODE / BROWSER / RESEARCH / ORCHESTRATE) '
+    'over a per-request model selector choosing between fast-chat, reasoning, and vision models \u2014 91% routing accuracy on a '
+    '150-query eval set, with ~40% per-request cost reduction vs. single-model baselines.',
+    'Production debugging & MLOps \u2014 Diagnosed a multi-agent deadlock where workers silently hung on provider rate limits '
+    '(\u226513 min MTTR against a 600s timeout); replaced indirection with a token-budgeted direct-dispatch path, cutting MTTR to '
+    '<30s. Productionized the full stack on Docker, Kubernetes, and GitHub Actions CI/CD with end-to-end observability on '
+    'token spend, latency P50/P95, and failover counts.',
+    'Memory architecture \u2014 local + semantic \u2014 Implemented a 3-layer memory system: durable user-profile store, 90-day session '
+    'log with auto-vacuum and full-text recall, and ChromaDB-backed semantic search \u2014 sub-200ms context loading, '
+    'cross-conversation continuity, no external vector-DB dependency for the local tier.',
+    'Full-stack shipping beyond the orchestrator \u2014 Extended the OpenClaw platform via external API integrations (OpenAI, '
+    'Perplexity, AgentMail), shipped a React/TypeScript/Supabase tracker with real-time sync, and integrated a MobileNetV2 '
+    'food-image classifier into a production nutrition platform. Ran a kanban-style 6-worker swarm (researcher, analyst, writer, '
+    'reviewer, backend-eng, ops) lifting long-running research throughput ~3\u00d7.',
 ]:
     add_bullet(b)
 

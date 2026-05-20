@@ -235,7 +235,15 @@
 
         /* ===== SKILLS ===== */
         .skills-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+        @media (max-width: 1024px) {
+            .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 600px) {
+            .skills-grid { grid-template-columns: 1fr; }
         }
         .skill-category {
             padding: 2rem; background: var(--bg-card); border-radius: 16px;
@@ -385,6 +393,124 @@
         }
         .timeline-details.expanded .timeline-details-inner {
             padding-top: 1.25rem;
+        }
+        .timeline-highlights {
+            list-style: none;
+            margin: 0 0 1.25rem 0;
+        }
+        .timeline-highlights li {
+            color: var(--text-secondary);
+            font-size: 0.96rem;
+            line-height: 1.65;
+            padding: 0.55rem 0 0.55rem 1.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(42, 42, 62, 0.6);
+        }
+        .timeline-highlights li:last-child { border-bottom: none; }
+        .timeline-highlights li::before {
+            content: '\25C6';
+            position: absolute; left: 0; top: 0.65rem;
+            color: var(--accent); font-size: 0.7rem;
+        }
+        .timeline-highlights li strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        .timeline-highlights li code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            background: rgba(0, 212, 255, 0.08);
+            color: var(--accent);
+            padding: 0.05rem 0.35rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+        }
+        .timeline-section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 1.5rem 0 0.75rem 0;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .timeline-section-label:first-child { margin-top: 0; }
+        .timeline-bullets li code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            background: rgba(0, 212, 255, 0.08);
+            color: var(--accent);
+            padding: 0.05rem 0.35rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+        }
+        .timeline-cert {
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+        }
+        .timeline-cert-link {
+            display: flex;
+            gap: 1.1rem;
+            align-items: center;
+            padding: 0.9rem;
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        .timeline-cert-link:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 18px var(--glow);
+            transform: translateX(2px);
+            color: inherit;
+            text-shadow: none;
+        }
+        .timeline-cert-thumb {
+            width: 190px;
+            height: 100px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(123, 47, 247, 0.06));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timeline-cert-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .timeline-cert-fallback {
+            font-size: 2.4rem;
+            color: var(--accent);
+            line-height: 1;
+            position: relative;
+            z-index: 0;
+        }
+        .timeline-cert-text {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+        .timeline-cert-text strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.98rem;
+        }
+        .timeline-cert-text .cert-meta {
+            color: var(--text-muted);
+            font-size: 0.83rem;
         }
 
         /* ===== CERTIFICATIONS ===== */
@@ -556,6 +682,8 @@
             .timeline-metric { flex-basis: 50%; min-width: 0; }
             .timeline-metric + .timeline-metric::before { display: none; }
             .metric-value { font-size: 1.2rem; }
+            .timeline-cert-link { flex-direction: column; align-items: flex-start; }
+            .timeline-cert-thumb { width: 100%; max-width: 320px; height: 160px; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2rem; }
@@ -777,43 +905,60 @@
                     </div>
                     <div class="timeline-location">&#128205; Spain</div>
                     <p class="timeline-summary">
-                        Building production-grade multi-agent AI systems on FastAPI — orchestration, smart model routing,
-                        fault-tolerant LLM integration, and end-to-end MLOps observability. Shipping platform features
-                        across backend (Kubernetes, CI/CD) and frontend (React, TypeScript, Supabase) with a focus on
-                        cost, reliability, and latency at scale.
+                        Building production-grade multi-agent AI platforms on FastAPI — orchestration, smart model
+                        routing, fault-tolerant LLM integration, self-learning loops, and end-to-end MLOps observability.
+                        Shipping infrastructure across backend (Kubernetes, CI/CD) and frontend (React, TypeScript,
+                        Supabase) with a focus on cost reduction, reliability, and latency at scale.
                     </p>
                     <div class="timeline-metrics">
                         <div class="timeline-metric">
-                            <div class="metric-value">90+</div>
-                            <div class="metric-label">AI Skills</div>
+                            <div class="metric-value">99.96%</div>
+                            <div class="metric-label">Cost Reduction</div>
                         </div>
                         <div class="timeline-metric">
-                            <div class="metric-value">7</div>
-                            <div class="metric-label">LLM Providers</div>
+                            <div class="metric-value">&lt;30s</div>
+                            <div class="metric-label">MTTR (from 13min)</div>
                         </div>
                         <div class="timeline-metric">
                             <div class="metric-value">&lt;0.6%</div>
                             <div class="metric-label">Error Rate</div>
                         </div>
                         <div class="timeline-metric">
-                            <div class="metric-value">~40%</div>
-                            <div class="metric-label">Cost Reduction</div>
+                            <div class="metric-value">91%</div>
+                            <div class="metric-label">Routing Accuracy</div>
                         </div>
                     </div>
+                    <ul class="timeline-highlights">
+                        <li><strong>Cost &amp; reliability at scale</strong> — Replaced a €5,000/mo commercial agent platform with an in-house FastAPI orchestrator at €1–5/mo (~99.96% reduction), holding error rate &lt;0.6% across 7 LLM providers under 50 concurrent users via credential pooling, circuit breakers, and automatic failover.</li>
+                        <li><strong>Smart routing — task-type and model selection</strong> — Layered a 4-mode task router (CODE / BROWSER / RESEARCH / ORCHESTRATE) over a per-request model selector choosing between fast-chat, reasoning, and vision models — 91% routing accuracy on a 150-query eval set, with ~40% per-request cost reduction vs. single-model baselines.</li>
+                        <li><strong>Production debugging &amp; MLOps</strong> — Diagnosed a multi-agent deadlock where workers silently hung on provider rate limits (≥13min MTTR against a 600s timeout); replaced indirection with a token-budgeted direct-dispatch path, cutting MTTR to &lt;30s. Productionized the full stack on Docker, Kubernetes, and GitHub Actions CI/CD with end-to-end observability on token spend, latency P50/P95, and failover counts.</li>
+                        <li><strong>Memory architecture — local + semantic</strong> — Implemented a 3-layer memory system: durable user-profile store, 90-day session log with auto-vacuum and full-text recall, and ChromaDB-backed semantic search — sub-200ms context loading, cross-conversation continuity, no external vector-DB dependency for the local tier.</li>
+                        <li><strong>Full-stack shipping beyond the orchestrator</strong> — Extended the OpenClaw platform via external API integrations (OpenAI, Perplexity, AgentMail), shipped a React/TypeScript/Supabase tracker with real-time sync, and integrated a MobileNetV2 food-image classifier into a production nutrition platform. Ran a kanban-style 6-worker swarm (researcher, analyst, writer, reviewer, backend-eng, ops) lifting long-running research throughput ~3×.</li>
+                    </ul>
                     <button class="timeline-toggle" type="button" aria-expanded="false" aria-controls="exp-exventure">
                         <span class="toggle-text">View detailed experience</span>
                         <span class="toggle-arrow">&rarr;</span>
                     </button>
                     <div class="timeline-details" id="exp-exventure">
                         <div class="timeline-details-inner">
+                            <div class="timeline-section-label">Platform Foundations</div>
                             <ul class="timeline-bullets">
                                 <li>Architected a multi-agent AI orchestration platform on FastAPI routing tasks across 90+ specialized skills via a custom agent-to-agent messaging protocol; sustained sub-2s first-token latency on interactive flows and ~91% routing accuracy on a 150-query evaluation set.</li>
                                 <li>Engineered fault-tolerant LLM integrations across 7 providers (OpenAI, Gemini, Perplexity, DeepSeek, Anthropic, Kimi, Mistral) with credential pooling, circuit breakers, exponential-backoff retries, and automatic provider failover — held error rate &lt;0.6% under 50 concurrent users.</li>
                                 <li>Built a smart model router selecting per-request between a fast chat model, a stronger reasoning model for autonomous workflows, and a vision model for image inputs — cut per-request cost ~40% versus single-model baselines while preserving downstream accuracy.</li>
-                                <li>Implemented a 3-layer memory architecture: durable user-profile store, full-session log with 90-day retention, and ChromaDB-backed semantic recall — enabling sub-200ms context loading and cross-conversation continuity.</li>
                                 <li>Productionized services with Docker, Kubernetes, and GitHub Actions CI/CD; added end-to-end observability (token spend, latency, model-failover counts, error rate) and a daily memory-watchdog cron, cutting Mean-Time-To-Detect by ~70%.</li>
-                                <li>Designed a kanban-style multi-worker swarm (6 profiles: researcher, analyst, writer, reviewer, backend-eng, ops) backed by a SQLite dispatch DB, lifting throughput on long-running research tasks ~3x.</li>
                                 <li>Extended OpenClaw platform via external API integrations (OpenAI, Perplexity, AgentMail); shipped a React/TypeScript/Supabase tracker with real-time sync and integrated a MobileNetV2 food-image classifier into a production nutrition platform.</li>
+                            </ul>
+                            <div class="timeline-section-label">Hermes Infrastructure</div>
+                            <ul class="timeline-bullets">
+                                <li>Replaced a €5,000/month commercial agent platform with a 634-line Python orchestrator (<code>ex-agent</code>), achieving feature parity at €1–5/month — ~99.96% operating-cost reduction — by routing tasks to in-house backends instead of paying per-call to a managed service.</li>
+                                <li>Designed a 4-mode task router dispatching CODE work to DeepSeek API with Codex CLI fallback, BROWSER work to a headless Playwright/Chromium runtime, RESEARCH to a token-budgeted DeepSeek pipeline, and ORCHESTRATE to a kanban worker swarm — every task logged to a SQLite audit DB for cost and latency analysis.</li>
+                                <li>Built a 2-layer self-improvement system: Layer 1 — real-time skill patches triggered by user corrections with a 4-tier severity policy (CRITICAL → fixed in 1 session, HIGH → 2, MEDIUM → 3, LOW → batched); Layer 2 — a weekly cron generating Pattern Reports, Staleness Audits, and Memory Consolidation drafts across the full session corpus.</li>
+                                <li>Diagnosed a multi-agent deadlock where workers silently hung at 0.5–1% CPU on provider rate limits, exhausting a hard 600s <code>delegate_task</code> timeout (≥13 min MTTR); replaced the indirection with direct API calls behind a token-budgeted dispatcher, cutting MTTR to &lt;30s.</li>
+                                <li>Implemented a 3-layer memory architecture: durable user/preference store (auto-flush every 6 turns), 90-day session log with auto-vacuum (156 sessions / 22 MB), and full-text session search — eliminating the need for an external vector DB for this use case.</li>
+                                <li>Operated a cron fleet (daily Memory Watchdog, weekly self-learning report, 7-day checkpoint auto-prune capped at 500 MB / 20 snapshots) emitting structured logs on token spend, model-failover counts, latency P50/P95, and per-provider error rate — cutting Mean-Time-To-Detect on agent drift by ~70%.</li>
+                                <li>Built a kanban-style multi-agent swarm with 6 specialized worker profiles (researcher, analyst, writer, reviewer, backend-eng, ops) running on a shared rate-limited LLM pool with an <code>orient → work → heartbeat → block → complete</code> lifecycle; lifted throughput on long-running research tasks ~3×.</li>
+                                <li>Restructured the agent's working knowledge base from 2.0 GB to 80 MB (~96% reduction) by separating media into a dedicated archive and building an O(1) keyword → file index, cutting agent cold-start I/O dramatically.</li>
                             </ul>
                         </div>
                     </div>
@@ -858,6 +1003,22 @@
                                 <li>Optimized Bluetooth communication for &lt;50ms command latency and reliable robot-to-app synchronization.</li>
                                 <li>Led a 4-person team over 8 months, securing <strong>1st place</strong> in the National Artificial Intelligence Competition (Rome Cup).</li>
                             </ul>
+                            <div class="timeline-cert">
+                                <a href="romecup-certificate.jpg" target="_blank" rel="noopener" class="timeline-cert-link" aria-label="View full RomeCup 2025 1st place certificate">
+                                    <div class="timeline-cert-thumb">
+                                        <span class="timeline-cert-fallback" aria-hidden="true">&#127942;</span>
+                                        <img src="romecup-certificate.jpg"
+                                             alt="RomeCup 2025 — 1° Classificato certificate"
+                                             class="timeline-cert-img"
+                                             loading="lazy"
+                                             onerror="this.remove()">
+                                    </div>
+                                    <div class="timeline-cert-text">
+                                        <strong>1° Classificato &middot; RomeCup 2025</strong>
+                                        <span class="cert-meta">Contest creativi di Robotica: CoBOT &middot; Università degli Studi Roma Tre &middot; 8 May 2025</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
