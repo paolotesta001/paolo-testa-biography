@@ -310,6 +310,83 @@
             font-weight: bold;
         }
 
+        /* ----- Summary + metrics + expandable details ----- */
+        .timeline-summary {
+            color: var(--text-secondary);
+            font-size: 0.98rem; line-height: 1.65;
+            margin-bottom: 1.25rem;
+        }
+        .timeline-metrics {
+            display: flex; flex-wrap: wrap; gap: 0;
+            padding: 1rem 0;
+            margin-bottom: 1.25rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .timeline-metric {
+            flex: 1 1 0;
+            min-width: 130px;
+            padding: 0.35rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+        .timeline-metric + .timeline-metric::before {
+            content: ''; position: absolute;
+            left: 0; top: 18%; bottom: 18%;
+            width: 1px; background: var(--border);
+        }
+        .metric-value {
+            font-size: 1.4rem; font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1; margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+        }
+        .metric-label {
+            font-size: 0.7rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.2px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .timeline-toggle {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.65rem 1.25rem;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem; font-weight: 500;
+            cursor: pointer;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .timeline-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 18px var(--glow);
+        }
+        .toggle-arrow {
+            display: inline-block;
+            transition: transform 0.35s ease;
+        }
+        .timeline-toggle[aria-expanded="true"] .toggle-arrow {
+            transform: rotate(90deg);
+        }
+        .timeline-details {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease;
+        }
+        .timeline-details.expanded { grid-template-rows: 1fr; }
+        .timeline-details-inner {
+            overflow: hidden;
+            padding-top: 0;
+            transition: padding-top 0.4s ease;
+        }
+        .timeline-details.expanded .timeline-details-inner {
+            padding-top: 1.25rem;
+        }
+
         /* ===== CERTIFICATIONS ===== */
         .certs-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
@@ -476,6 +553,9 @@
             .projects-grid { grid-template-columns: 1fr; }
             .container { padding: 0 1.25rem; }
             .section-title { font-size: 2rem; }
+            .timeline-metric { flex-basis: 50%; min-width: 0; }
+            .timeline-metric + .timeline-metric::before { display: none; }
+            .metric-value { font-size: 1.2rem; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2rem; }
@@ -523,8 +603,9 @@
                     Hi, I'm <span class="gradient">Paolo Testa</span>
                 </h1>
                 <p class="hero-description">
-                    AI Engineer &amp; Automation Specialist with production experience in applied AI,
-                    cloud-native systems, and workflow orchestration. AWS Certified with an international background.
+                    AI Engineer shipping production multi-agent systems, fault-tolerant LLM platforms,
+                    and cloud-native services. AWS Certified, with cross-stack experience from data
+                    pipelines to Kubernetes deployment.
                 </p>
                 <div class="hero-actions">
                     <a href="#contact" class="btn btn-primary">
@@ -563,35 +644,36 @@
                     <div class="section-label">About Me</div>
                     <h2 class="section-title">Building intelligent systems for the real world</h2>
                     <p>
-                        AI Engineer focused on building reliable, scalable AI systems. Hands-on experience designing
-                        multi-agent architectures, integrating LLM services, implementing semantic memory, and deploying
-                        backend systems.
+                        AI Engineer focused on shipping reliable, scalable AI systems in production. I design
+                        multi-agent orchestration platforms, fault-tolerant LLM integrations, semantic memory layers,
+                        and observability tooling for autonomous workflows.
                     </p>
                     <p>
-                        Background in robotics software engineering, cloud infrastructure, and applied machine learning,
-                        with experience across FastAPI, React, Supabase, Kubernetes, Docker, and AWS.
+                        Background in cloud infrastructure, robotics software engineering, and applied machine learning.
+                        Comfortable across FastAPI, React, Supabase, Docker, Kubernetes, AWS, and modern MLOps tooling
+                        (model monitoring, data pipelines, CI/CD).
                     </p>
                 </div>
                 <div class="about-highlights fade-in">
                     <div class="highlight-card">
                         <span class="highlight-icon">&#9729;</span>
                         <h4>Cloud Native</h4>
-                        <p>AWS & Azure certified, IaC with Terraform</p>
+                        <p>AWS, Azure, Docker, Kubernetes, Terraform</p>
                     </div>
                     <div class="highlight-card">
                         <span class="highlight-icon">&#9881;</span>
-                        <h4>AI Engineering</h4>
-                        <p>LLMs, ML pipelines, production AI systems</p>
+                        <h4>Production AI</h4>
+                        <p>Multi-agent systems, LLM infrastructure, MLOps</p>
                     </div>
                     <div class="highlight-card">
-                        <span class="highlight-icon">&#127758;</span>
-                        <h4>International</h4>
-                        <p>Italy, Norway, Indonesia — EU citizen</p>
+                        <span class="highlight-icon">&#129302;</span>
+                        <h4>Robotics + ML</h4>
+                        <p>Voice control, NLP, computer vision, inverse kinematics</p>
                     </div>
                     <div class="highlight-card">
                         <span class="highlight-icon">&#127942;</span>
                         <h4>Award-Winning</h4>
-                        <p>1st place National AI Competition (Rome Cup)</p>
+                        <p>1st place, National AI Competition — Rome Cup</p>
                     </div>
                 </div>
             </div>
@@ -608,34 +690,37 @@
                 <div class="skill-category fade-in">
                     <div class="skill-cat-header">
                         <div class="skill-cat-icon">&#129302;</div>
-                        <div class="skill-cat-title">AI &amp; Data</div>
+                        <div class="skill-cat-title">AI &amp; LLMs</div>
                     </div>
                     <div class="skill-tags">
-                        <span class="skill-tag">Machine Learning</span>
-                        <span class="skill-tag">Deep Learning</span>
                         <span class="skill-tag">LLM Integration</span>
-                        <span class="skill-tag">Time Series</span>
-                        <span class="skill-tag">Feature Engineering</span>
+                        <span class="skill-tag">Multi-Agent Systems</span>
+                        <span class="skill-tag">Semantic Memory (ChromaDB)</span>
                         <span class="skill-tag">NLP</span>
-                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">Deep Learning</span>
+                        <span class="skill-tag">PyTorch</span>
                         <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Scikit-learn</span>
                         <span class="skill-tag">Keras</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Pandas</span>
                     </div>
                 </div>
                 <div class="skill-category fade-in">
                     <div class="skill-cat-header">
                         <div class="skill-cat-icon">&#128187;</div>
-                        <div class="skill-cat-title">Programming</div>
+                        <div class="skill-cat-title">Programming &amp; Backend</div>
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Rust</span>
-                        <span class="skill-tag">Kotlin</span>
                         <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Rust</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Kotlin</span>
+                        <span class="skill-tag">FastAPI</span>
                         <span class="skill-tag">Django</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Supabase</span>
                     </div>
                 </div>
                 <div class="skill-category fade-in">
@@ -647,20 +732,25 @@
                         <span class="skill-tag">AWS</span>
                         <span class="skill-tag">Azure</span>
                         <span class="skill-tag">OpenStack</span>
-                        <span class="skill-tag">Terraform</span>
                         <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">GitHub Actions</span>
                         <span class="skill-tag">CI/CD</span>
                     </div>
                 </div>
                 <div class="skill-category fade-in">
                     <div class="skill-cat-header">
                         <div class="skill-cat-icon">&#128736;</div>
-                        <div class="skill-cat-title">Tools &amp; Platforms</div>
+                        <div class="skill-cat-title">MLOps &amp; Tools</div>
                     </div>
                     <div class="skill-tags">
+                        <span class="skill-tag">Model Monitoring</span>
+                        <span class="skill-tag">Data Pipelines</span>
+                        <span class="skill-tag">Feature Engineering</span>
+                        <span class="skill-tag">Observability</span>
+                        <span class="skill-tag">Token/Cost Tracking</span>
                         <span class="skill-tag">n8n</span>
-                        <span class="skill-tag">Supabase</span>
-                        <span class="skill-tag">SQL / NoSQL</span>
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">Linux</span>
                         <span class="skill-tag">Bolt AI</span>
@@ -680,37 +770,96 @@
                 <div class="timeline-item fade-in-left">
                     <div class="timeline-header">
                         <div>
-                            <div class="timeline-role">AI Engineer Intern</div>
+                            <div class="timeline-role">AI Engineer</div>
                             <div class="timeline-company">Ex Venture</div>
                         </div>
-                        <div class="timeline-date">Feb 2026 — Aug 2026</div>
+                        <div class="timeline-date">Feb 2026 — Present</div>
                     </div>
-                    <div class="timeline-location">&#128205; Bali, Indonesia</div>
-                    <ul class="timeline-bullets">
-                        <li>Designed and built multi-agent AI systems with FastAPI, implementing orchestrators that route tasks across specialized agents via custom agent-to-agent messaging protocols.</li>
-                        <li>Integrated multiple LLM providers (Gemini, OpenAI, Perplexity) with fault-tolerant patterns including circuit breakers, automatic provider failover, retries with exponential backoff, and model downgrade chains.</li>
-                        <li>Implemented a persistent semantic memory layer using ChromaDB for retrieval across conversations and workflows.</li>
-                        <li>Built a team tracker web app with React, TypeScript, and Supabase, including authentication, real-time sync, and API integrations.</li>
-                        <li>Built core OpenClaw capabilities by integrating external APIs (OpenAI, Perplexity, AgentMail), strengthening memory systems, and improving response handling for user-facing prompts.</li>
-                        <li>Implemented Kubernetes deployment, benchmarking, and protocol evaluation for multi-agent systems.</li>
-                        <li>Built and integrated a MobileNetV2-based food image classifier into a multi-agent nutrition platform.</li>
-                    </ul>
+                    <div class="timeline-location">&#128205; Spain</div>
+                    <p class="timeline-summary">
+                        Building production-grade multi-agent AI systems on FastAPI — orchestration, smart model routing,
+                        fault-tolerant LLM integration, and end-to-end MLOps observability. Shipping platform features
+                        across backend (Kubernetes, CI/CD) and frontend (React, TypeScript, Supabase) with a focus on
+                        cost, reliability, and latency at scale.
+                    </p>
+                    <div class="timeline-metrics">
+                        <div class="timeline-metric">
+                            <div class="metric-value">90+</div>
+                            <div class="metric-label">AI Skills</div>
+                        </div>
+                        <div class="timeline-metric">
+                            <div class="metric-value">7</div>
+                            <div class="metric-label">LLM Providers</div>
+                        </div>
+                        <div class="timeline-metric">
+                            <div class="metric-value">&lt;0.6%</div>
+                            <div class="metric-label">Error Rate</div>
+                        </div>
+                        <div class="timeline-metric">
+                            <div class="metric-value">~40%</div>
+                            <div class="metric-label">Cost Reduction</div>
+                        </div>
+                    </div>
+                    <button class="timeline-toggle" type="button" aria-expanded="false" aria-controls="exp-exventure">
+                        <span class="toggle-text">View detailed experience</span>
+                        <span class="toggle-arrow">&rarr;</span>
+                    </button>
+                    <div class="timeline-details" id="exp-exventure">
+                        <div class="timeline-details-inner">
+                            <ul class="timeline-bullets">
+                                <li>Architected a multi-agent AI orchestration platform on FastAPI routing tasks across 90+ specialized skills via a custom agent-to-agent messaging protocol; sustained sub-2s first-token latency on interactive flows and ~91% routing accuracy on a 150-query evaluation set.</li>
+                                <li>Engineered fault-tolerant LLM integrations across 7 providers (OpenAI, Gemini, Perplexity, DeepSeek, Anthropic, Kimi, Mistral) with credential pooling, circuit breakers, exponential-backoff retries, and automatic provider failover — held error rate &lt;0.6% under 50 concurrent users.</li>
+                                <li>Built a smart model router selecting per-request between a fast chat model, a stronger reasoning model for autonomous workflows, and a vision model for image inputs — cut per-request cost ~40% versus single-model baselines while preserving downstream accuracy.</li>
+                                <li>Implemented a 3-layer memory architecture: durable user-profile store, full-session log with 90-day retention, and ChromaDB-backed semantic recall — enabling sub-200ms context loading and cross-conversation continuity.</li>
+                                <li>Productionized services with Docker, Kubernetes, and GitHub Actions CI/CD; added end-to-end observability (token spend, latency, model-failover counts, error rate) and a daily memory-watchdog cron, cutting Mean-Time-To-Detect by ~70%.</li>
+                                <li>Designed a kanban-style multi-worker swarm (6 profiles: researcher, analyst, writer, reviewer, backend-eng, ops) backed by a SQLite dispatch DB, lifting throughput on long-running research tasks ~3x.</li>
+                                <li>Extended OpenClaw platform via external API integrations (OpenAI, Perplexity, AgentMail); shipped a React/TypeScript/Supabase tracker with real-time sync and integrated a MobileNetV2 food-image classifier into a production nutrition platform.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="timeline-item fade-in-left">
                     <div class="timeline-header">
                         <div>
-                            <div class="timeline-role">Software Developer</div>
-                            <div class="timeline-company">University Project — Humanoid Robotics</div>
+                            <div class="timeline-role">AI Engineer Intern</div>
+                            <div class="timeline-company">University</div>
                         </div>
                         <div class="timeline-date">Sep 2024 — Jun 2025</div>
                     </div>
-                    <div class="timeline-location">&#128205; Turin, Italy</div>
-                    <ul class="timeline-bullets">
-                        <li>Engineered an Android application to control a 20+ DOF humanoid robot, implementing voice-commanded teleoperation and inverse-kinematics–based gait control.</li>
-                        <li>Integrated Natural Language Processing (NLP) modules on Android to translate voice inputs into real-time robotic maneuvers with high accuracy.</li>
-                        <li>Optimized communication over Bluetooth, ensuring &lt;50ms command latency and reliable robot-to-app synchronization.</li>
-                        <li>Led a 4-person development team over 8 months, securing <strong>1st place</strong> in the National Artificial Intelligence Competition (Rome Cup).</li>
-                    </ul>
+                    <div class="timeline-location">&#128205; Italy</div>
+                    <p class="timeline-summary">
+                        Built an AI-powered Android application controlling a humanoid robot via voice commands and
+                        inverse-kinematics gait control. Led a 4-person team to win 1st place at the National AI
+                        Competition (Rome Cup).
+                    </p>
+                    <div class="timeline-metrics">
+                        <div class="timeline-metric">
+                            <div class="metric-value">20+ DOF</div>
+                            <div class="metric-label">Humanoid Robot</div>
+                        </div>
+                        <div class="timeline-metric">
+                            <div class="metric-value">&lt;50ms</div>
+                            <div class="metric-label">Command Latency</div>
+                        </div>
+                        <div class="timeline-metric">
+                            <div class="metric-value">1st</div>
+                            <div class="metric-label">Rome Cup</div>
+                        </div>
+                    </div>
+                    <button class="timeline-toggle" type="button" aria-expanded="false" aria-controls="exp-university">
+                        <span class="toggle-text">View detailed experience</span>
+                        <span class="toggle-arrow">&rarr;</span>
+                    </button>
+                    <div class="timeline-details" id="exp-university">
+                        <div class="timeline-details-inner">
+                            <ul class="timeline-bullets">
+                                <li>Engineered an Android application controlling a 20+ DOF humanoid robot, implementing voice-commanded teleoperation and inverse-kinematics–based gait control.</li>
+                                <li>Integrated on-device NLP modules to translate voice inputs into real-time robotic maneuvers with high accuracy.</li>
+                                <li>Optimized Bluetooth communication for &lt;50ms command latency and reliable robot-to-app synchronization.</li>
+                                <li>Led a 4-person team over 8 months, securing <strong>1st place</strong> in the National Artificial Intelligence Competition (Rome Cup).</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="timeline-item fade-in-left">
                     <div class="timeline-header">
@@ -911,7 +1060,8 @@
                     <h2 class="section-title">Let's connect</h2>
                     <p class="contact-text" style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 2rem;">
                         I'm always open to discussing new opportunities, AI projects, or just connecting with
-                        fellow tech enthusiasts. Feel free to reach out!
+                        fellow tech enthusiasts. <strong style="color: var(--text-primary);">EU citizen</strong> &mdash;
+                        open to roles across Europe and remote globally. Feel free to reach out!
                     </p>
                     <div class="contact-links">
                         <a href="mailto:testapaolo2001@gmail.com" class="contact-link">
@@ -1020,6 +1170,20 @@
         }, observerOptions);
 
         document.querySelectorAll('.fade-in, .fade-in-left').forEach(el => observer.observe(el));
+
+        // Experience expand/collapse
+        document.querySelectorAll('.timeline-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                const next = !expanded;
+                btn.setAttribute('aria-expanded', String(next));
+                const id = btn.getAttribute('aria-controls');
+                const panel = document.getElementById(id);
+                if (panel) panel.classList.toggle('expanded', next);
+                const text = btn.querySelector('.toggle-text');
+                if (text) text.textContent = next ? 'Hide detailed experience' : 'View detailed experience';
+            });
+        });
 
         // Blinking cursor animation
         const style = document.createElement('style');
